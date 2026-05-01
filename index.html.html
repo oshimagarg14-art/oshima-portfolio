@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Oshima Garg — Content & Campaign Marketing</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
+<style>
+:root{
+  --indigo:#4f46e5;--indigo-l:#818cf8;--pink:#ec4899;--pink-l:#f9a8d4;
+  --cyan:#06b6d4;--cyan-l:#67e8f9;--amber:#f59e0b;--amber-l:#fcd34d;
+  --bg:#050510;--bg2:#0a0a1a;--bg3:#0f0f2a;
+  --text:#e2e8f0;--muted:#94a3b8;--border:rgba(99,102,241,.2);--glass:rgba(15,15,42,.7);
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+::-webkit-scrollbar{width:5px;}
+::-webkit-scrollbar-track{background:var(--bg);}
+::-webkit-scrollbar-thumb{background:linear-gradient(var(--indigo),var(--pink));border-radius:3px;}
+body::before{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");opacity:.4;}
+html{scroll-behavior:smooth;}
+body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;cursor:none;overflow-x:hidden;}
+
+/* CURSOR */
+#cur{position:fixed;width:10px;height:10px;background:var(--indigo-l);border-radius:50%;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);mix-blend-mode:screen;}
+#cur-ring{position:fixed;width:34px;height:34px;border:1.5px solid rgba(129,140,248,.5);border-radius:50%;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);transition:width .3s,height .3s,border-color .3s;}
+
+/* LOADER */
+#loader{position:fixed;inset:0;z-index:9000;background:var(--bg);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:24px;transition:opacity .8s,visibility .8s;}
+#loader.hidden{opacity:0;visibility:hidden;}
+.l-init{font-family:'Syne',sans-serif;font-size:72px;font-weight:800;background:linear-gradient(135deg,var(--indigo-l),var(--pink),var(--cyan));-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
+.l-bar{width:200px;height:3px;background:rgba(255,255,255,.1);border-radius:2px;overflow:hidden;}
+.l-fill{height:100%;width:0;background:linear-gradient(90deg,var(--indigo),var(--pink),var(--cyan));border-radius:2px;animation:lbar 1.8s ease forwards;}
+@keyframes lbar{to{width:100%;}}
+
+canvas#pts{position:fixed;inset:0;z-index:0;pointer-events:none;}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:16px 5%;display:flex;align-items:center;justify-content:space-between;backdrop-filter:blur(16px);background:rgba(5,5,16,.6);border-bottom:1px solid var(--border);}
+.nav-logo{font-family:'Syne',sans-serif;font-size:20px;font-weight:800;background:linear-gradient(135deg,var(--indigo-l),var(--pink));-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
+.nav-links{display:flex;gap:28px;list-style:none;}
+.nav-links a{color:var(--muted);text-decoration:none;font-size:14px;font-weight:500;position:relative;transition:color .3s;}
+.nav-links a::after{content:'';position:absolute;bottom:-4px;left:0;width:0;height:2px;background:linear-gradient(90deg,var(--indigo-l),var(--pink));transition:width .3s;border-radius:2px;}
+.nav-links a:hover{color:var(--text);}
+.nav-links a:hover::after{width:100%;}
+
+section{position:relative;z-index:1;padding:100px 5%;}
+.s-label{font-size:11px;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:var(--cyan);margin-bottom:12px;}
+.s-title{font-family:'Syne',sans-serif;font-size:clamp(28px,4vw,44px);font-weight:800;line-height:1.1;margin-bottom:44px;}
+
+/* HERO */
+#hero{min-height:100vh;display:flex;align-items:center;gap:60px;padding-top:120px;}
+.h-left{flex:1;max-width:640px;}
+.h-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(79,70,229,.15);border:1px solid rgba(79,70,229,.3);border-radius:100px;padding:6px 16px;font-size:13px;color:var(--indigo-l);margin-bottom:24px;}
+.h-badge span{width:6px;height:6px;background:var(--indigo-l);border-radius:50%;animation:pulse 2s infinite;}
+@keyframes pulse{0%,100%{opacity:1;}50%{opacity:.3;}}
+.h-name{font-family:'Syne',sans-serif;font-size:clamp(44px,6vw,76px);font-weight:800;line-height:1;margin-bottom:8px;background:linear-gradient(135deg,#fff 30%,var(--indigo-l) 60%,var(--pink-l));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-size:200% auto;animation:shimmer 4s linear infinite;}
+@keyframes shimmer{0%{background-position:0% center;}100%{background-position:200% center;}}
+.h-sub{font-size:17px;color:var(--muted);margin-bottom:32px;line-height:1.7;font-weight:300;}
+.h-sub em{color:var(--cyan-l);font-style:normal;font-weight:500;}
+.h-ctas{display:flex;gap:14px;flex-wrap:wrap;}
+.btn-p{display:inline-flex;align-items:center;gap:8px;padding:13px 26px;background:linear-gradient(135deg,var(--indigo),var(--pink));border-radius:100px;color:#fff;font-weight:600;font-size:14px;text-decoration:none;transition:transform .2s,box-shadow .2s;cursor:none;}
+.btn-p:hover{transform:translateY(-2px);box-shadow:0 12px 40px rgba(79,70,229,.4);}
+.btn-s{display:inline-flex;align-items:center;gap:8px;padding:13px 26px;background:transparent;border:1px solid var(--border);border-radius:100px;color:var(--text);font-weight:600;font-size:14px;text-decoration:none;transition:all .2s;cursor:none;}
+.btn-s:hover{border-color:var(--indigo-l);color:var(--indigo-l);transform:translateY(-2px);}
+
+/* FLOAT CARD */
+.h-right{flex-shrink:0;}
+.f-card{width:300px;background:var(--glass);border:1px solid var(--border);border-radius:24px;padding:28px;backdrop-filter:blur(20px);animation:float 6s ease-in-out infinite;}
+@keyframes float{0%,100%{transform:translateY(0) rotate3d(1,1,0,2deg);}50%{transform:translateY(-14px) rotate3d(1,1,0,-2deg);}}
+.f-avatar{width:56px;height:56px;border-radius:50%;background:linear-gradient(135deg,var(--indigo),var(--pink));display:flex;align-items:center;justify-content:center;font-family:'Syne',sans-serif;font-size:20px;font-weight:800;color:#fff;margin-bottom:16px;}
+.f-name{font-family:'Syne',sans-serif;font-size:18px;font-weight:700;margin-bottom:3px;}
+.f-role{font-size:12px;color:var(--muted);margin-bottom:20px;}
+.f-stats{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+.stat{background:rgba(255,255,255,.04);border-radius:10px;padding:12px;}
+.stat-n{font-family:'Syne',sans-serif;font-size:20px;font-weight:800;background:linear-gradient(135deg,var(--cyan),var(--indigo-l));-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
+.stat-l{font-size:10px;color:var(--muted);margin-top:2px;}
+.f-tag{display:inline-flex;margin-top:16px;padding:5px 12px;background:rgba(245,158,11,.1);border:1px solid rgba(245,158,11,.3);border-radius:100px;font-size:11px;color:var(--amber-l);font-weight:500;}
+
+/* ABOUT */
+#about{background:var(--bg2);}
+.a-grid{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center;}
+.a-text p{color:var(--muted);line-height:1.8;margin-bottom:14px;font-size:15px;}
+.a-text p strong{color:var(--text);}
+.a-cards{display:flex;flex-direction:column;gap:14px;}
+.a-card{background:var(--glass);border:1px solid var(--border);border-radius:14px;padding:18px;display:flex;gap:14px;align-items:flex-start;backdrop-filter:blur(12px);transition:border-color .3s,transform .3s;}
+.a-card:hover{border-color:var(--indigo);transform:translateX(8px);}
+.a-icon{font-size:26px;flex-shrink:0;}
+.a-ttl{font-family:'Syne',sans-serif;font-size:14px;font-weight:700;margin-bottom:3px;}
+.a-desc{font-size:12px;color:var(--muted);line-height:1.5;}
+
+/* EXPERIENCE */
+#experience{background:var(--bg);}
+.tl{position:relative;padding-left:28px;}
+.tl::before{content:'';position:absolute;left:0;top:0;bottom:0;width:2px;background:linear-gradient(180deg,var(--indigo),var(--pink),var(--cyan),transparent);}
+.tl-item{position:relative;margin-bottom:44px;opacity:0;transform:translateY(28px);transition:opacity .6s,transform .6s;}
+.tl-item.visible{opacity:1;transform:translateY(0);}
+.tl-dot{position:absolute;left:-35px;top:6px;width:14px;height:14px;border-radius:50%;background:linear-gradient(135deg,var(--indigo),var(--pink));border:2px solid var(--bg);box-shadow:0 0 16px rgba(79,70,229,.5);}
+.tl-card{background:var(--glass);border:1px solid var(--border);border-radius:18px;padding:24px;backdrop-filter:blur(12px);transition:border-color .3s,box-shadow .3s;}
+.tl-card:hover{border-color:rgba(99,102,241,.5);box-shadow:0 8px 40px rgba(79,70,229,.15);}
+.tl-hdr{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:6px;flex-wrap:wrap;gap:8px;}
+.tl-role{font-family:'Syne',sans-serif;font-size:17px;font-weight:700;}
+.tl-date{font-size:11px;color:var(--cyan);background:rgba(6,182,212,.1);border:1px solid rgba(6,182,212,.2);padding:3px 10px;border-radius:100px;}
+.tl-co{font-size:13px;color:var(--pink-l);font-weight:500;margin-bottom:16px;}
+.tl-buls{list-style:none;display:flex;flex-direction:column;gap:8px;}
+.tl-buls li{font-size:13px;color:var(--muted);line-height:1.6;padding-left:18px;position:relative;}
+.tl-buls li::before{content:'→';position:absolute;left:0;color:var(--indigo-l);}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:16px;}
+.chip{padding:3px 10px;border-radius:100px;font-size:11px;font-weight:600;}
+.ci{background:rgba(79,70,229,.15);color:var(--indigo-l);border:1px solid rgba(79,70,229,.2);}
+.cp{background:rgba(236,72,153,.15);color:var(--pink-l);border:1px solid rgba(236,72,153,.2);}
+.cc{background:rgba(6,182,212,.15);color:var(--cyan-l);border:1px solid rgba(6,182,212,.2);}
+.ca{background:rgba(245,158,11,.15);color:var(--amber-l);border:1px solid rgba(245,158,11,.2);}
+
+/* SKILLS */
+#skills{background:var(--bg2);}
+.sk-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:24px;}
+.sk-cat{background:var(--glass);border:1px solid var(--border);border-radius:18px;padding:24px;backdrop-filter:blur(12px);}
+.sk-ttl{font-family:'Syne',sans-serif;font-size:14px;font-weight:700;margin-bottom:16px;display:flex;align-items:center;gap:8px;}
+.sk-bar-item{margin-bottom:14px;}
+.sk-bar-hdr{display:flex;justify-content:space-between;margin-bottom:5px;}
+.sk-nm{font-size:12px;color:var(--muted);}
+.sk-pc{font-size:12px;color:var(--muted);}
+.sk-bg{height:3px;background:rgba(255,255,255,.06);border-radius:2px;overflow:hidden;}
+.sk-fill{height:100%;width:0;border-radius:2px;transition:width 1.2s cubic-bezier(.16,1,.3,1);}
+.ch-wrap{display:flex;flex-wrap:wrap;gap:6px;}
+
+/* CAMPAIGNS */
+#campaigns{background:var(--bg);}
+.c-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px;}
+.c-card{background:var(--glass);border:1px solid var(--border);border-radius:18px;padding:24px;backdrop-filter:blur(12px);position:relative;overflow:hidden;transition:transform .3s,box-shadow .3s;cursor:none;}
+.c-card::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,var(--c1,var(--indigo)),var(--c2,var(--pink)));opacity:0;transition:opacity .3s;}
+.c-card:hover{transform:translateY(-6px);box-shadow:0 20px 60px rgba(0,0,0,.4);}
+.c-card:hover::before{opacity:.06;}
+.c-emoji{font-size:32px;margin-bottom:14px;display:block;}
+.c-ttl{font-family:'Syne',sans-serif;font-size:16px;font-weight:700;margin-bottom:6px;}
+.c-desc{font-size:13px;color:var(--muted);line-height:1.6;margin-bottom:16px;}
+.c-metrics{display:flex;flex-wrap:wrap;gap:6px;}
+.m-badge{display:flex;align-items:center;gap:5px;padding:4px 10px;background:rgba(255,255,255,.05);border-radius:100px;font-size:11px;font-weight:600;}
+.m-dot{width:5px;height:5px;border-radius:50%;}
+
+/* EDU */
+#education{background:var(--bg2);}
+.e-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:20px;}
+.e-card{background:var(--glass);border:1px solid var(--border);border-radius:18px;padding:24px;backdrop-filter:blur(12px);transition:border-color .3s;}
+.e-card:hover{border-color:var(--indigo);}
+.e-icon{font-size:32px;margin-bottom:14px;}
+.e-deg{font-family:'Syne',sans-serif;font-size:15px;font-weight:700;margin-bottom:3px;}
+.e-sch{font-size:13px;color:var(--pink-l);margin-bottom:3px;}
+.e-yr{font-size:11px;color:var(--muted);}
+.cert-list{list-style:none;display:flex;flex-direction:column;gap:8px;margin-top:14px;}
+.cert-item{font-size:12px;color:var(--muted);padding-left:14px;position:relative;line-height:1.5;}
+.cert-item::before{content:'◆';position:absolute;left:0;color:var(--amber);font-size:7px;top:3px;}
+
+/* CONTACT */
+#contact{background:var(--bg);text-align:center;}
+.ct-inner{max-width:560px;margin:0 auto;}
+.ct-av{width:72px;height:72px;border-radius:50%;background:linear-gradient(135deg,var(--indigo),var(--pink));display:flex;align-items:center;justify-content:center;font-family:'Syne',sans-serif;font-size:24px;font-weight:800;color:#fff;margin:0 auto 20px;position:relative;}
+.av-ring{position:absolute;inset:-6px;border-radius:50%;border:2px solid rgba(79,70,229,.4);animation:spin 8s linear infinite;}
+@keyframes spin{to{transform:rotate(360deg);}}
+.ct-name{font-family:'Syne',sans-serif;font-size:26px;font-weight:800;margin-bottom:6px;}
+.ct-tag{font-size:15px;color:var(--muted);margin-bottom:36px;}
+.ct-cards{display:flex;flex-wrap:wrap;gap:14px;justify-content:center;}
+.ct-card{display:flex;align-items:center;gap:10px;background:var(--glass);border:1px solid var(--border);border-radius:14px;padding:14px 18px;text-decoration:none;color:var(--text);transition:all .3s;backdrop-filter:blur(12px);cursor:none;}
+.ct-card:hover{border-color:var(--indigo-l);transform:translateY(-3px);box-shadow:0 8px 30px rgba(79,70,229,.2);}
+.ct-ci{font-size:18px;}
+.ct-inf{text-align:left;}
+.ct-lbl{font-size:10px;color:var(--muted);margin-bottom:1px;}
+.ct-val{font-size:13px;font-weight:500;}
+
+footer{text-align:center;padding:28px;font-size:12px;color:var(--muted);border-top:1px solid var(--border);position:relative;z-index:1;}
+
+@media(max-width:768px){
+  #hero{flex-direction:column;text-align:center;}
+  .h-right{display:none;}
+  .a-grid{grid-template-columns:1fr;}
+  .tl{padding-left:18px;}
+  nav .nav-links{display:none;}
+  .h-ctas{justify-content:center;}
+}
+.reveal{opacity:0;transform:translateY(36px);transition:opacity .7s ease,transform .7s ease;}
+.reveal.visible{opacity:1;transform:translateY(0);}
+</style>
+</head>
+<body>
+
+<div id="cur"></div>
+<div id="cur-ring"></div>
+
+<div id="loader">
+  <div class="l-init">OG</div>
+  <div class="l-bar"><div class="l-fill"></div></div>
+</div>
+
+<canvas id="pts"></canvas>
+
+<nav>
+  <div class="nav-logo">Oshima Garg</div>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#campaigns">Campaigns</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<section id="hero">
+  <div class="h-left">
+    <div class="h-badge"><span></span> Open to new opportunities · Immediate Joiner</div>
+    <h1 class="h-name">Oshima Garg</h1>
+    <p class="h-sub">Content & Campaign Marketing professional turning <em>audience insights</em> into campaigns that convert — <em>28% better conversion</em>, <em>₹1CR budget</em>, <em>5K+ registrations</em> across <em>100+ campaigns</em>.</p>
+    <div class="h-ctas">
+      <a href="#contact" class="btn-p">✦ Let's Connect</a>
+      <a href="#experience" class="btn-s">View Work →</a>
+    </div>
+  </div>
+  <div class="h-right">
+    <div class="f-card">
+      <div class="f-avatar">OG</div>
+      <div class="f-name">Oshima Garg</div>
+      <div class="f-role">Content & Campaign Marketing · Gurugram</div>
+      <div class="f-stats">
+        <div class="stat"><div class="stat-n">100+</div><div class="stat-l">Campaigns</div></div>
+        <div class="stat"><div class="stat-n">28%</div><div class="stat-l">CVR Uplift</div></div>
+        <div class="stat"><div class="stat-n">5K+</div><div class="stat-l">Registrations</div></div>
+        <div class="stat"><div class="stat-n">₹1CR</div><div class="stat-l">Budget Managed</div></div>
+      </div>
+      <div class="f-tag">🏆 Delta Award — Top Performer</div>
+    </div>
+  </div>
+</section>
+
+<section id="about">
+  <div class="s-label">About Me</div>
+  <div class="a-grid">
+    <div class="a-text reveal">
+      <h2 class="s-title">I turn insights into campaigns that actually move the needle.</h2>
+      <p>I have this thing — if a campaign isn't working, I <strong>can't leave it alone</strong> until I know why. At Cuemath I spotted that macro creators were converting 2–3x lower than micro creators. Nobody flagged it. I dug into the data, restructured the entire strategy, and drove 28% conversion improvement.</p>
+      <p>That's how I work — <strong>diagnose first, execute second</strong>. I develop ICP-aligned content, build structured multi-channel campaigns, and use AI tools to improve speed and scale — all without needing hand-holding.</p>
+      <p>Beyond work I'm pretty chill — doom-scrolling creator content and calling it <strong>market research</strong> 😄</p>
+    </div>
+    <div class="a-cards">
+      <div class="a-card reveal">
+        <div class="a-icon">🎯</div>
+        <div><div class="a-ttl">ICP-Aligned Content</div><div class="a-desc">MathFit — repositioned ed-tech as mental fitness. CTR 0.9% → 2.8%. Competitors replicated it.</div></div>
+      </div>
+      <div class="a-card reveal">
+        <div class="a-icon">📊</div>
+        <div><div class="a-ttl">Data-Driven Strategy</div><div class="a-desc">CPR ₹300 → ₹110. Identified micro creators converting 2–3x better. Restructured entire strategy.</div></div>
+      </div>
+      <div class="a-card reveal">
+        <div class="a-icon">🤖</div>
+        <div><div class="a-ttl">AI-Powered Operations</div><div class="a-desc">Claude + ChatGPT for hooks, briefs, ideation. Reporting time 4 hours → 15 minutes.</div></div>
+      </div>
+      <div class="a-card reveal">
+        <div class="a-icon">🚀</div>
+        <div><div class="a-ttl">Multi-Channel Execution</div><div class="a-desc">LinkedIn, Instagram, Facebook, email, WhatsApp — 5,000+ registrations, 35% community growth.</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="experience">
+  <div class="s-label">Experience</div>
+  <h2 class="s-title">Where I've Built</h2>
+  <div class="tl">
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <div class="tl-card">
+        <div class="tl-hdr">
+          <div class="tl-role">Content & Campaign Marketing Executive</div>
+          <div class="tl-date">Apr 2025 – Present</div>
+        </div>
+        <div class="tl-co">Cuemath (Cue Learn Pvt. Ltd.) · Gurugram</div>
+        <ul class="tl-buls">
+          <li>Developed ICP-aligned content across 100+ campaign cycles — conceptualized MathFit driving CTR from 0.9% to 2.8% and 28% conversion improvement; organically replicated by 3+ competitor brands.</li>
+          <li>Executed structured campaigns across LinkedIn, Instagram, Facebook, email, and WhatsApp for 5 brand partners — Willow TV (US), Yumi, Little Spoon, Made Good, Lesser Evil — exceeding targets by 20–25%.</li>
+          <li>Repurposed content across multiple channels — drove 5,000+ registrations and 35% growth in community-led engagement across 100+ campaign cycles.</li>
+          <li>Identified micro-community content converting 2–3x better than mass reach — restructured distribution strategy achieving CPR reduction from ₹300 to ₹110 (63% improvement).</li>
+          <li>Leveraged Claude and ChatGPT for content operations — built Google Sheets dashboards reducing reporting time from 4 hours to 15 minutes; enabled weekly optimization cycles.</li>
+          <li>Collaborated with design, performance marketing, and ops teams — coordinated Willow TV US World Cup campaign delivering all assets against broadcast deadlines with zero misses.</li>
+        </ul>
+        <div class="chips">
+          <span class="chip ci">Content Strategy</span>
+          <span class="chip cp">Demand Generation</span>
+          <span class="chip cc">Multi-Channel Campaigns</span>
+          <span class="chip ca">AI Tools</span>
+          <span class="chip ci">Influencer Marketing</span>
+          <span class="chip cp">₹1CR Budget</span>
+        </div>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <div class="tl-card">
+        <div class="tl-hdr">
+          <div class="tl-role">Sales & Marketing Intern</div>
+          <div class="tl-date">May – Jun 2024</div>
+        </div>
+        <div class="tl-co">Amul India · Delhi NCR</div>
+        <ul class="tl-buls">
+          <li>Executed retailer outreach and field market research — 40% increase in retail coverage, 12% improvement in brand visibility.</li>
+          <li>Improved CRM data accuracy by 15% — enabling sharper audience segmentation and distribution planning.</li>
+        </ul>
+        <div class="chips">
+          <span class="chip cc">Field Marketing</span>
+          <span class="chip ci">Market Research</span>
+          <span class="chip ca">FMCG</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="skills">
+  <div class="s-label">Skills</div>
+  <h2 class="s-title">What I Bring</h2>
+  <div class="sk-grid">
+    <div class="sk-cat reveal">
+      <div class="sk-ttl">✍️ Content & Copywriting</div>
+      <div class="sk-bar-item"><div class="sk-bar-hdr"><span class="sk-nm">Hook Writing</span><span class="sk-pc">95%</span></div><div class="sk-bg"><div class="sk-fill" style="--t:95%;background:linear-gradient(90deg,var(--indigo),var(--indigo-l));"></div></div></div>
+      <div class="sk-bar-item"><div class="sk-bar-hdr"><span class="sk-nm">Campaign Brief Writing</span><span class="sk-pc">92%</span></div><div class="sk-bg"><div class="sk-fill" style="--t:92%;background:linear-gradient(90deg,var(--indigo),var(--pink));"></div></div></div>
+      <div class="sk-bar-item"><div class="sk-bar-hdr"><span class="sk-nm">Brand Storytelling</span><span class="sk-pc">90%</span></div><div class="sk-bg"><div class="sk-fill" style="--t:90%;background:linear-gradient(90deg,var(--pink),var(--pink-l));"></div></div></div>
+      <div class="sk-bar-item"><div class="sk-bar-hdr"><span class="sk-nm">Content Repurposing</span><span class="sk-pc">88%</span></div><div class="sk-bg"><div class="sk-fill" style="--t:88%;background:linear-gradient(90deg,var(--pink),var(--indigo));"></div></div></div>
+    </div>
+    <div class="sk-cat reveal">
+      <div class="sk-ttl">📈 Campaign & Demand Gen</div>
+      <div class="sk-bar-item"><div class="sk-bar-hdr"><span class="sk-nm">Multi-Channel Execution</span><span class="sk-pc">92%</span></div><div class="sk-bg"><div class="sk-fill" style="--t:92%;background:linear-gradient(90deg,var(--cyan),var(--cyan-l));"></div></div></div>
+      <div class="sk-bar-item"><div class="sk-bar-hdr"><span class="sk-nm">Conversion Rate Optimization</span><span class="sk-pc">88%</span></div><div class="sk-bg"><div class="sk-fill" style="--t:88%;background:linear-gradient(90deg,var(--cyan),var(--indigo));"></div></div></div>
+      <div class="sk-bar-item"><div class="sk-bar-hdr"><span class="sk-nm">Audience Research</span><span class="sk-pc">90%</span></div><div class="sk-bg"><div class="sk-fill" style="--t:90%;background:linear-gradient(90deg,var(--indigo-l),var(--cyan));"></div></div></div>
+      <div class="sk-bar-item"><div class="sk-bar-hdr"><span class="sk-nm">Performance Tracking</span><span class="sk-pc">85%</span></div><div class="sk-bg"><div class="sk-fill" style="--t:85%;background:linear-gradient(90deg,var(--cyan-l),var(--indigo-l));"></div></div></div>
+    </div>
+    <div class="sk-cat reveal">
+      <div class="sk-ttl">⚡ AI & Tools</div>
+      <div class="ch-wrap">
+        <span class="chip ci">Claude</span>
+        <span class="chip cp">ChatGPT</span>
+        <span class="chip cc">Google Analytics</span>
+        <span class="chip ca">Meta Business Suite</span>
+        <span class="chip ci">HubSpot</span>
+        <span class="chip cp">Salesforce</span>
+        <span class="chip cc">Canva</span>
+        <span class="chip ca">Figma</span>
+        <span class="chip ci">Google Sheets</span>
+        <span class="chip cp">Microsoft Excel</span>
+      </div>
+    </div>
+    <div class="sk-cat reveal">
+      <div class="sk-ttl">📱 Platforms</div>
+      <div class="ch-wrap">
+        <span class="chip cp">Instagram</span>
+        <span class="chip ci">LinkedIn</span>
+        <span class="chip cc">Facebook</span>
+        <span class="chip ca">WhatsApp</span>
+        <span class="chip ci">Email</span>
+        <span class="chip cp">Triller</span>
+        <span class="chip cc">Lemon8</span>
+        <span class="chip ca">YouTube</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="campaigns">
+  <div class="s-label">Key Work</div>
+  <h2 class="s-title">Campaigns That Moved the Needle</h2>
+  <div class="c-grid">
+    <div class="c-card reveal" style="--c1:var(--indigo);--c2:var(--pink);">
+      <span class="c-emoji">🏋️</span>
+      <div class="c-ttl">MathFit Campaign</div>
+      <div class="c-desc">Repositioned Cuemath from ed-tech to mental fitness brand. No brief, no team — one insight, full campaign. Organically replicated by 3+ competitor brands.</div>
+      <div class="c-metrics">
+        <div class="m-badge"><div class="m-dot" style="background:var(--indigo-l);"></div>CTR 0.9%→2.8%</div>
+        <div class="m-badge"><div class="m-dot" style="background:var(--pink-l);"></div>28% CVR Uplift</div>
+        <div class="m-badge"><div class="m-dot" style="background:var(--cyan-l);"></div>Competitors Replicated</div>
+      </div>
+    </div>
+    <div class="c-card reveal" style="--c1:var(--cyan);--c2:var(--indigo);">
+      <span class="c-emoji">🏏</span>
+      <div class="c-ttl">Willow TV US Campaign</div>
+      <div class="c-desc">Cross-border content campaign for Willow TV's World Cup coverage targeting NRI/diaspora audiences across Triller and Lemon8 — platforms identified as 3x better for this audience.</div>
+      <div class="c-metrics">
+        <div class="m-badge"><div class="m-dot" style="background:var(--cyan-l);"></div>CPR -54%</div>
+        <div class="m-badge"><div class="m-dot" style="background:var(--indigo-l);"></div>ER 3x Higher</div>
+        <div class="m-badge"><div class="m-dot" style="background:var(--pink-l);"></div>Zero Deadline Misses</div>
+      </div>
+    </div>
+    <div class="c-card reveal" style="--c1:var(--pink);--c2:var(--amber);">
+      <span class="c-emoji">📊</span>
+      <div class="c-ttl">Micro-First Strategy Pivot</div>
+      <div class="c-desc">Identified macro creators converting 2–3x lower than micro. Dug into 3 months of data nobody had flagged. Restructured entire distribution strategy.</div>
+      <div class="c-metrics">
+        <div class="m-badge"><div class="m-dot" style="background:var(--pink-l);"></div>CPR ₹300→₹110</div>
+        <div class="m-badge"><div class="m-dot" style="background:var(--amber-l);"></div>35% Cost Efficiency</div>
+        <div class="m-badge"><div class="m-dot" style="background:var(--indigo-l);"></div>5,000+ Registrations</div>
+      </div>
+    </div>
+    <div class="c-card reveal" style="--c1:var(--amber);--c2:var(--cyan);">
+      <span class="c-emoji">🤖</span>
+      <div class="c-ttl">AI-Powered Reporting System</div>
+      <div class="c-desc">Built Google Sheets master dashboard with SUMIF, VLOOKUP, Pivot Tables. Enabled weekly optimization cycles where monthly was the norm before.</div>
+      <div class="c-metrics">
+        <div class="m-badge"><div class="m-dot" style="background:var(--amber-l);"></div>4hrs→15min Reports</div>
+        <div class="m-badge"><div class="m-dot" style="background:var(--cyan-l);"></div>100+ Campaigns Tracked</div>
+        <div class="m-badge"><div class="m-dot" style="background:var(--indigo-l);"></div>Weekly Optimization</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="education">
+  <div class="s-label">Education & Certifications</div>
+  <h2 class="s-title">Foundation</h2>
+  <div class="e-grid">
+    <div class="e-card reveal">
+      <div class="e-icon">🎓</div>
+      <div class="e-deg">MBA — Marketing</div>
+      <div class="e-sch">BML Munjal University</div>
+      <div class="e-yr">Jul 2023 – Mar 2025 · Gurugram</div>
+      <ul class="cert-list">
+        <li class="cert-item">Placement Coordination Cell — corporate relations & PR</li>
+        <li class="cert-item">Enactus Club — Design Team Head, +40% event engagement</li>
+        <li class="cert-item">PR & Sponsorship Coordinator — college fest</li>
+      </ul>
+    </div>
+    <div class="e-card reveal">
+      <div class="e-icon">📜</div>
+      <div class="e-deg">Certifications</div>
+      <div class="e-sch">Google · HubSpot · SEMrush · LinkedIn</div>
+      <div class="e-yr">2024</div>
+      <ul class="cert-list">
+        <li class="cert-item">Google Digital Garage — Fundamentals of Digital Marketing</li>
+        <li class="cert-item">HubSpot Academy — Inbound Sales & CRM Optimization</li>
+        <li class="cert-item">SEMrush — Content Marketing & Marketing Analytics</li>
+        <li class="cert-item">LinkedIn Learning — Graphic Design & Figma</li>
+      </ul>
+    </div>
+    <div class="e-card reveal">
+      <div class="e-icon">🏆</div>
+      <div class="e-deg">Recognition</div>
+      <div class="e-sch">Cuemath · 2025</div>
+      <div class="e-yr">Top Performer Award</div>
+      <ul class="cert-list">
+        <li class="cert-item">Delta Award — Top Performer for measurable regional growth</li>
+        <li class="cert-item">Exceeded all campaign targets by 20–25%</li>
+        <li class="cert-item">Only campaign replicated by 3+ competitor brands organically</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="s-label">Let's Talk</div>
+  <div class="ct-inner">
+    <div class="ct-av">OG<div class="av-ring"></div></div>
+    <div class="ct-name">Oshima Garg</div>
+    <div class="ct-tag">Open to Content, Brand & Influencer Marketing roles · Gurugram · Immediate Joiner</div>
+    <div class="ct-cards">
+      <a href="mailto:oshimagarg14@gmail.com" class="ct-card">
+        <div class="ct-ci">✉️</div>
+        <div class="ct-inf"><div class="ct-lbl">Email</div><div class="ct-val">oshimagarg14@gmail.com</div></div>
+      </a>
+      <a href="tel:+918683814702" class="ct-card">
+        <div class="ct-ci">📞</div>
+        <div class="ct-inf"><div class="ct-lbl">Phone</div><div class="ct-val">+91 86838 14702</div></div>
+      </a>
+      <a href="https://linkedin.com/in/oshima-garg" target="_blank" class="ct-card">
+        <div class="ct-ci">💼</div>
+        <div class="ct-inf"><div class="ct-lbl">LinkedIn</div><div class="ct-val">linkedin.com/in/oshima-garg</div></div>
+      </a>
+      <div class="ct-card">
+        <div class="ct-ci">📍</div>
+        <div class="ct-inf"><div class="ct-lbl">Location</div><div class="ct-val">Gurugram, Haryana</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>Built with ✦ · Oshima Garg · Content & Campaign Marketing</footer>
+
+<script>
+window.addEventListener('load',()=>{setTimeout(()=>{document.getElementById('loader').classList.add('hidden');},2000);});
+
+const cur=document.getElementById('cur'),ring=document.getElementById('cur-ring');
+let mx=0,my=0,rx=0,ry=0;
+document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;cur.style.left=mx+'px';cur.style.top=my+'px';});
+(function animR(){rx+=(mx-rx)*.12;ry+=(my-ry)*.12;ring.style.left=rx+'px';ring.style.top=ry+'px';requestAnimationFrame(animR);})();
+document.querySelectorAll('a,button,.c-card,.a-card').forEach(el=>{
+  el.addEventListener('mouseenter',()=>{ring.style.width='52px';ring.style.height='52px';ring.style.borderColor='rgba(236,72,153,.6)';});
+  el.addEventListener('mouseleave',()=>{ring.style.width='34px';ring.style.height='34px';ring.style.borderColor='rgba(129,140,248,.5)';});
+});
+
+const canvas=document.getElementById('pts'),ctx=canvas.getContext('2d');
+let W,H,pts=[];
+function resize(){W=canvas.width=window.innerWidth;H=canvas.height=window.innerHeight;}
+resize();window.addEventListener('resize',()=>{resize();init();});
+function init(){pts=[];for(let i=0;i<75;i++)pts.push({x:Math.random()*W,y:Math.random()*H,vx:(Math.random()-.5)*.3,vy:(Math.random()-.5)*.3,r:Math.random()*1.5+.5});}
+init();
+(function draw(){
+  ctx.clearRect(0,0,W,H);
+  pts.forEach(p=>{p.x+=p.vx;p.y+=p.vy;if(p.x<0||p.x>W)p.vx*=-1;if(p.y<0||p.y>H)p.vy*=-1;ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,Math.PI*2);ctx.fillStyle='rgba(129,140,248,.5)';ctx.fill();});
+  for(let i=0;i<pts.length;i++)for(let j=i+1;j<pts.length;j++){const dx=pts[i].x-pts[j].x,dy=pts[i].y-pts[j].y,d=Math.sqrt(dx*dx+dy*dy);if(d<120){ctx.beginPath();ctx.moveTo(pts[i].x,pts[i].y);ctx.lineTo(pts[j].x,pts[j].y);ctx.strokeStyle=`rgba(129,140,248,${.15*(1-d/120)})`;ctx.lineWidth=.5;ctx.stroke();}}
+  requestAnimationFrame(draw);
+})();
+
+const obs=new IntersectionObserver(e=>{e.forEach(en=>{if(en.isIntersecting)en.target.classList.add('visible');});},{threshold:.15});
+document.querySelectorAll('.reveal,.tl-item').forEach(el=>obs.observe(el));
+
+const barObs=new IntersectionObserver(e=>{e.forEach(en=>{if(en.isIntersecting)en.target.querySelectorAll('.sk-fill').forEach(b=>{b.style.width=b.style.getPropertyValue('--t')||'80%';});});},{threshold:.3});
+document.querySelectorAll('.sk-cat').forEach(el=>barObs.observe(el));
+</script>
+</body>
+</html>
